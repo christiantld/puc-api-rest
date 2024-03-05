@@ -1,0 +1,97 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "PUC-API",
+    "dateExported": "2024-03-05T18:15:23.141Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "994ae26e-748f-4b1d-be10-91123a6a2d1b",
+            "colId": "4f242a49-844a-4688-9d00-99a5750d489e",
+            "containerId": "",
+            "name": "List Products",
+            "url": "/products",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-03-05T16:53:07.253Z",
+            "modified": "2024-03-05T16:54:59.683Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f993633b-70a7-4e88-bc82-0034f1bfc96d",
+            "colId": "4f242a49-844a-4688-9d00-99a5750d489e",
+            "containerId": "",
+            "name": "Show Product",
+            "url": "/products/3",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-05T16:56:38.164Z",
+            "modified": "2024-03-05T18:12:06.750Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "fc8f3204-61b8-42b5-badb-59d28582668e",
+            "colId": "4f242a49-844a-4688-9d00-99a5750d489e",
+            "containerId": "",
+            "name": "Create Product",
+            "url": "/products",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-05T16:57:28.790Z",
+            "modified": "2024-03-05T16:58:27.549Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"new product\",\n  \"stock\": 20,\n  \"price\": 120.2\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "51126461-4efc-499d-8b51-ecc1d86f20d8",
+            "colId": "4f242a49-844a-4688-9d00-99a5750d489e",
+            "containerId": "",
+            "name": "Update Product",
+            "url": "/products/1",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-03-05T16:58:45.357Z",
+            "modified": "2024-03-05T17:37:35.206Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"update product\",\n  \"stock\": 11,\n  \"price\": 119.9\n}",
+                "form": []
+            },
+            "reqType": "put",
+            "tests": []
+        },
+        {
+            "_id": "8f4ffc5d-5d16-46d0-a9af-7ab75ee91b69",
+            "colId": "4f242a49-844a-4688-9d00-99a5750d489e",
+            "containerId": "",
+            "name": "Delete Product",
+            "url": "/products/2",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-03-05T17:00:19.712Z",
+            "modified": "2024-03-05T18:11:28.602Z",
+            "headers": [],
+            "params": [],
+            "reqType": "del",
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:3000"
+        }
+    }
+}
