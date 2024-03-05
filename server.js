@@ -1,38 +1,42 @@
 import express, { json } from "express";
 import cors from "cors";
 import apicache from 'apicache'
+import redis from 'redis';
 import { listProducts, createProducts, updateProduct, deleteProduct, showProduct } from "./handlers/index.js"
 
 const app = express();
-let cache = apicache.middleware('2 minutes')
+const cacheWithRedis = apicache.options({redisClient: redis.createClient()}).middleware
+
+const onlyStatus200 = (req, res) => res.statusCode === 200
+const cacheSuccess = cacheWithRedis('5 minutes', onlyStatus200)
 app.use(cors());
 app.use(json());
 
-app.get("/", cache, (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     message: "Check path /products to see the list of products",
   })
 })
 
-app.get("/products", cache, (req, res) => {
+app.get("/products", cacheSuccess, (req, res) => {
   const {products, lastModified} = listProducts()
   res.setHeader("Last-Modified", lastModified);
-  res.json(products);
+  return res.json(products);
 })
 
-app.get("/products/:id", cache, (req, res) => {
+app.get("/products/:id", cacheSuccess, (req, res) => {
     const {product, lastModified} = showProduct(req.params.id);
-    res.setHeader("Last-Modified", lastModified);
     if (!product) {
-     return res.status(404).json({ message: "Product not found" });
+      return res.status(404).json({ message: "Product not found" });
     }
+    res.setHeader("Last-Modified", lastModified);
     return res.json(product);
 })
 
 app.post("/products",(req, res) => {
   const product = req.body;
   const newProduct = createProducts(product);
-  res.status(201).json({
+  return res.status(201).json({
     message: "Product created",
   });
 })
@@ -44,7 +48,7 @@ app.put("/products/:id",(req, res) => {
   if (!updatedProduct) {
    return res.status(404).json({ message: "Product not found" });
   }
-  res.status(200).json({
+  return res.status(200).json({
     message: "Product updated",
   })
 })
@@ -55,7 +59,7 @@ app.delete("/products/:id",(req, res) => {
   if (!deletedProduct) {
    return res.status(404).json({ message: "Product not found" });
   }
-  res.status(200).json({
+ return res.status(200).json({
     message: "Product deleted",
   })
 })
